@@ -1,10 +1,22 @@
 <html>
 <head>
     <script type="text/javascript" src="../prerequisites/angular.min.js"></script>
-    <script type="text/javascript" src="../prerequisites/angular-autocomplete.js"></script>
+    <script type="text/javascript" src="../autocomplete/angular-autocomplete.js"></script>
     <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="mainCtrl.js"></script>
 </head>
-<body ng-app="autocompleteDemo">
-    <input auto-complete/>
+<body ng-app="autocompleteDemo" ng-controller="mainCtrl">
+    <auto-complete ng-addnew="true"
+                   ng-height="40" 
+                   ng-width="250" 
+                   ng-placeholder="mashti" 
+                   ng-direction="rtl" 
+                   ng-fontfamily="Tahoma" 
+                   ng-fontsize="25" 
+                   ng-minchar="3"
+                   ng-search-method="DemoMethod"
+                   ng-key="Key"
+                   ng-value="Value">
+    </auto-complete>
 </body>
 </html>
