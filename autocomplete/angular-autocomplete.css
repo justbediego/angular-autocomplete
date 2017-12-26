@@ -1,0 +1,18 @@
+.angular-autocomplete {
+    display: inline-block;
+}
+
+    .angular-autocomplete .suggestions {
+        position: absolute;
+        background-color:white;
+    }
+
+        .angular-autocomplete .suggestions .border {
+            border: 1px solid #a9a9a9;
+            border-top:0;
+            height: 100px;
+        }
+        .angular-autocomplete .suggestions .suggestion{
+
+        }
+
