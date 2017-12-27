@@ -10,9 +10,7 @@
         .angular-autocomplete .suggestions .border {
             border: 1px solid #a9a9a9;
             border-top:0;
-            height: 100px;
         }
         .angular-autocomplete .suggestions .suggestion{
-
+            padding-right: 10px;
         }
-

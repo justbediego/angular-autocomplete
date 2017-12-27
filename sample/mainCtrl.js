@@ -2,31 +2,31 @@ angular.module("autocompleteDemo").controller('mainCtrl', function ($scope) {
     var data = [
         {
             key: 12,
-            value: 'First Test'
+            value: 'first test'
         },
         {
             key: 13,
-            value: 'First Love'
+            value: 'first love'
         },
         {
             key: 14,
-            value: 'First Date'
+            value: 'first date'
         },
         {
             key: 15,
-            value: 'First Breakup'
+            value: 'first breakup'
         },
         {
             key: 16,
-            value: 'First Time'
+            value: 'first time'
         },
         {
             key: 17,
-            value: 'First Name'
+            value: 'first name'
         },
         {
             key: 18,
-            value: 'First Test'
+            value: 'first take'
         },
     ]
     $scope.DemoMethod = function (phrase) {
