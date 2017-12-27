@@ -3,33 +3,73 @@ app.directive("autoComplete", function () {
     return {
         restrict: "E",
         scope: {
-            ngHeight: '@',
-            ngWidth: '@',
             ngPlaceholder: '@',
-            ngDirection: '@',
-            ngFontfamily: '@',
-            ngFontsize: '@',
             ngMinchar: '@',
             ngAddnew: '@',
             ngSearchMethod: '&',
             ngKey: '=',
-            ngValue: '='
+            ngValue: '=',
+            ngSuggestionList: '=',
         },
-        template: "<div class='angular-autocomplete'><input type='text' style='height: {{ngHeight}}px; width: {{ngWidth}}px; direction: {{ngDirection}}; font-family:{{ngFontfamily}}; font-size:{{ngFontsize}}' placeholder={{ngPlaceholder}} ng-change='textChanged()' ng-model='tempText'/><div class='suggestions' style='width:{{ngWidth}}px;'><div class='border'><div ng-repeat='match in matches' class='suggestion' style='height:{{ngHeight}}px; line-height:{{ngHeight}}px; direction: {{ngDirection}}; font-family:{{ngFontfamily}}; font-size:{{ngFontsize}}'>{{match.value}}</div></div></div></div>",
+        template: "<div class='angular-autocomplete'><input autocomplete='off' ng-keydown='inputKeyPress(event)' class='input-text' type='text' placeholder={{ngPlaceholder}} ng-change='textChanged()' ng-model='tempText'/><div class='suggestions'><div class='border'><div ng-repeat='match in ngSuggestionList' class='suggestion' ng-mouseover='suggestionHover($index)' ng-mouseleave='suggestionOut()' ng-class='{highlighted: highlighted==$index}' ng-click='selectSuggestion($index)'>{{match.value}}</div></div></div></div>",
         link: function (scope, element, attrs) {
             scope.tempText = scope.ngValue;
-            scope.matches = [];
+            scope.ngSuggestionList = [];
+            scope.firstOne = {
+                tempText: scope.tempText,
+                value: scope.ngValue,
+                key: scope.ngKey,
+            };
             scope.textChanged = function () {
                 if (scope.tempText.length >= scope.ngMinchar) {
-                    scope.matches = scope.ngSearchMethod()(scope.tempText);
+                    scope.firstOne.tempText = scope.tempText;
+                    scope.highlighted = -1;
+                    scope.ngSearchMethod()(scope.tempText);
                 } else {
-                    scope.matches = [];
+                    scope.ngSuggestionList = [];
+                }
+            }
+            scope.suggestionHover = function (index) {
+                scope.changeHighlighted(index);
+            }
+            scope.suggestionOut = function () {
+                scope.changeHighlighted(-1);
+            }
+            scope.selectSuggestion = function (index) {
+                scope.ngValue = scope.ngSuggestionList[index].value;
+                scope.ngKey = scope.ngSuggestionList[index].key;
+                scope.tempText = scope.ngSuggestionList[index].value;
+                scope.ngSuggestionList = [];
+            }
+            scope.changeHighlighted = function (index) {
+                scope.highlighted = index;
+                if (index == -1) {
+                    scope.ngValue = scope.firstOne.value;
+                    scope.ngKey = scope.firstOne.key;
+                    scope.tempText = scope.firstOne.tempText;
+                } else {
+                    scope.ngValue = scope.ngSuggestionList[index].value;
+                    scope.ngKey = scope.ngSuggestionList[index].key;
+                    scope.tempText = scope.ngSuggestionList[index].value;
+                }
+            }
+            scope.inputKeyPress = function () {
+                var key = event.keyCode;
+                switch (key) {
+                    case 38:
+                        if (scope.highlighted >= 0)
+                            scope.changeHighlighted(scope.highlighted - 1);
+                        break;
+                    case 40:
+                        if (scope.highlighted < scope.ngSuggestionList.length - 1)
+                            scope.changeHighlighted(scope.highlighted + 1);
+                        break;
+                    case 13:
+                        if (scope.highlighted > -1)
+                            scope.selectSuggestion(scope.highlighted);
+                        break;
                 }
             }
         }
     }
-
-
-
-
 });

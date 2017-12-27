@@ -2,15 +2,34 @@
     display: inline-block;
 }
 
+    .angular-autocomplete .input-text, .angular-autocomplete .suggestions {
+        width: 250px;
+        direction: rtl;
+        font-family: Tahoma;
+        font-size: 10px;
+    }
+
+    .angular-autocomplete .input-text {
+        height: 40px;
+    }
+
     .angular-autocomplete .suggestions {
         position: absolute;
-        background-color:white;
+        background-color: white;
     }
 
         .angular-autocomplete .suggestions .border {
             border: 1px solid #a9a9a9;
-            border-top:0;
+            border-top: 0;
         }
-        .angular-autocomplete .suggestions .suggestion{
+
+        .angular-autocomplete .suggestions .suggestion {
+            height: 25px;
+            line-height: 25px;
             padding-right: 10px;
+            cursor:pointer;
+        }
+
+        .angular-autocomplete .suggestions .suggestion.highlighted {
+            background-color:#eee;
         }

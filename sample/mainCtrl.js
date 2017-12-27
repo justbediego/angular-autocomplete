@@ -30,7 +30,7 @@ angular.module("autocompleteDemo").controller('mainCtrl', function ($scope) {
         },
     ]
     $scope.DemoMethod = function (phrase) {
-        return data.filter(o => o.value.indexOf(phrase) == 0);
+        $scope.SuggestionList = data.filter(o => o.value.indexOf(phrase) == 0);
     };
     $scope.Key = 12;
     $scope.Value = "MASHTI OSKOL";

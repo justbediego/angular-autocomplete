@@ -4,22 +4,22 @@
     <script type="text/javascript" src="../prerequisites/angular.min.js"></script>
     <script type="text/javascript" src="../autocomplete/angular-autocomplete.js"></script>
     <script type="text/javascript" src="app.js"></script>
-    <script type="text/javascript" src="mainCtrl.js"></script>    
+    <script type="text/javascript" src="mainCtrl.js"></script>
 </head>
 <body ng-app="autocompleteDemo" ng-controller="mainCtrl">
+    <div>
+        Selected Key: {{Key}}
+    </div>
+    <div>
+        Selected Value: {{Value}}
+    </div>
     <auto-complete ng-addnew="true"
-                   ng-height="40" 
-                   ng-width="250" 
-                   ng-placeholder="mashti" 
-                   ng-direction="rtl" 
-                   ng-fontfamily="Tahoma" 
-                   ng-fontsize="10" 
+                   ng-placeholder="mashti"
                    ng-minchar="3"
                    ng-search-method="DemoMethod"
                    ng-key="Key"
-                   ng-value="Value">
+                   ng-value="Value"
+                   ng-suggestion-list="SuggestionList">
     </auto-complete>
-    khar
-    <div>mashti</div>
 </body>
 </html>
